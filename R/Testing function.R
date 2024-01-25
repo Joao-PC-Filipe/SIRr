@@ -68,7 +68,7 @@ SIR_result <- function(initial_state, times, sir_model, parameters){
 library(deSolve)
 
 # Initial conditions from the first day of data
-initial_state <- c(S = early_data$S[1], I = early_data$I[1], R = early_data$R[1])
+initial_state <- c(S = early_data$S[29], I = early_data$I[29], R = early_data$R[29])
 
 # 200 days of data
 times <- seq(0, 200, by = 1)
