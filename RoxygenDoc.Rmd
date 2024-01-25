@@ -1,0 +1,50 @@
+```{r, eval=FALSE}
+#' SIR Model Function
+#'
+#' This function models the dynamics of an infectious disease in a population
+#' divided into three compartments: Susceptible (S), Infected (I), and Recovered (R).
+#' It calculates the rate of change for each compartment using the SIR model equations.
+#'
+#' @param time Current time in the simulation.
+#' @param state A named vector representing the current state of the system with
+#'   elements S, I, R (Susceptible, Infected, Recovered).
+#' @param parameters A named vector with model parameters: `beta` (infection rate)
+#'   and `gamma` (recovery rate).
+#'
+#' @return Returns a list containing the derivatives of S, I, and R.
+#' @export
+#'
+#' @examples
+#' initial_state <- c(S = 0.99, I = 0.01, R = 0)
+#' parameters <- c(beta = 0.3, gamma = 0.1)
+#' times <- seq(0, 80, by = 1)
+#' result <- sir_model(times, initial_state, parameters)
+sir_model <- function(time, state, parameters) {}
+  # function body
+  
+#' Simulate SIR Model Over Time
+#'
+#' Runs the SIR model simulation over a specified time period.
+#' It uses the provided `sir_model` function to compute the dynamics
+#' of the disease spread and returns a data frame with the simulation results.
+#'
+#' @param initial_state A named vector representing the initial state of
+#'   the population in each compartment (S, I, R).
+#' @param times A numeric vector of times at which to simulate the model.
+#' @param sir_model The SIR model function to be used in the simulation.
+#' @param parameters A named vector with model parameters: `beta` (infection rate)
+#'   and `gamma` (recovery rate).
+#'
+#' @return A data frame with columns for each time step and each compartment
+#'   (S, I, R), representing the state of the model at each time point.
+#' @export
+#'
+#' @examples
+#' initial_state <- c(S = 0.99, I = 0.01, R = 0)
+#' parameters <- c(beta = 0.3, gamma = 0.1)
+#' times <- seq(0, 80, by = 1)
+#' result <- SIR_result(initial_state, times, sir_model, parameters)
+SIR_result <- function(initial_state, times, sir_model, parameters) {
+  # function body
+}
+
