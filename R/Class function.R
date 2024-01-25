@@ -1,5 +1,6 @@
 library(deSolve)
 library(tidyverse)
+library(devtools)
 #SIR model function
 sir_model <- function(time, state, parameters) {
   with(as.list(c(state, parameters)), {
@@ -49,17 +50,53 @@ SIR_result(initial_state, times, sir_model, parameters) {
 #'
 #' @export
 
-SIRModel <- function(S, I, R, beta, gamma) {
-  structure(list(
-    state = c(S = S, I = I, R = R),
-    parameters = c(beta = beta, gamma = gamma)
-  ), class = "SIRModel")
-}
+library(methods)
+library(deSolve)
 
-simulate <- function(object, times) {
-  if(class(object) != "SIRModel") {
-    stop("Object must be of class SIRModel")
-  }
+#Define the SIRResult class
+setClass("SIRResult",
+         representation(
+           initial_state = "numeric",
+           times = "numeric",
+           sir_model = "function",
+           parameters = "numeric",
+           output = "data.frame"
+         ))
+
+#Define a constructor method for the SIRResult class
+setMethod("initialize",
+          signature("SIRResult"),
+          function(.Object, initial_state, times, sir_model, parameters) {
+            .Object@initial_state <- initial_state
+            .Object@times <- times
+            .Object@sir_model <- sir_model
+            .Object@parameters <- parameters
+            return(.Object)
+          })
 
 
-}
+#Define a method to generate the SIR results
+setMethod("generate",
+          signature = "SIRResult",
+          function(object) {
+            output <- ode(y = object@initial_state, times = object@times, func = object@sir_model, parms = object@parameters)
+            object@output <- as.data.frame(output)
+            return(object)
+          })
+
+sir_result_object <- new("SIRResult",
+                         initial_state = initial_state,
+                         times = times,
+                         sir_model = function(time, state, parameters) {
+                           with(as.list(c(state, parameters)), {
+                             dS <- beta * S * I
+                             dI <- beta * S * I - gamma * I
+                             dR <- gamma * I
+                             return(list(c(dS, dI, dR)))
+                           })
+                         },
+                         parameters = parameters)
+
+sir_result_object <- generate(sir_result_object)
+
+print(sir_result_object@output)
