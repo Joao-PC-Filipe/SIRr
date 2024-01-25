@@ -49,50 +49,17 @@ SIR_result(initial_state, times, sir_model, parameters) {
 #'
 #' @export
 
-setClass("SIRModel",
-         representation(
-           initial_state = "numeric",
-           parameters = "numeric"
-         ))
+SIRModel <- function(S, I, R, beta, gamma) {
+  structure(list(
+    state = c(S = S, I = I, R = R),
+    parameters = c(beta = beta, gamma = gamma)
+  ), class = "SIRModel")
+}
+
+simulate <- function(object, times) {
+  if(class(object) != "SIRModel") {
+    stop("Object must be of class SIRModel")
+  }
 
 
-setMethod("initialize",
-          signature("SIRModel"),
-          function(.Object, initial_state, parameters){
-            .Object@initial_state <- initial_state
-            .Object@parameters <- parameters
-            return(.Object)
-          })
-
-
-setMethod("simulate",
-          signature = "SIRModel",
-          function(object, times) {
-            output <- ode(y = object@initial_state, times = times, func = sir_model, parms = object@parameters)
-            return(output)
-          })
-
-
-sir_object <- new("SIRModel", initial_state = initial_state, parameters = parameters)
-
-output <- simulate(sir_object, times = times)
-
-print(output)
-
-
-setClass("SIRResult",
-         representation(
-           output = "data.frame"
-         ))
-
-setMethod("initialize",
-          signature("SIRResult"),
-          function(.Object, output) {
-            .Object@output <- output
-            return(.Object)
-})
-
-sir_result_object <- new("SIRResult", output = output)
-
-print(sir_result_object)
-
+}
