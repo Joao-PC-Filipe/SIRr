@@ -13,11 +13,9 @@ Description: This package provides tools for simulating the SIR (Susceptible, In
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-
 Suggests: 
     knitr,
     testthat (>= 3.0.0)
-
 Imports: deSolve, 
   ggplot2, methods
 RoxygenNote: 7.2.3
