@@ -76,7 +76,7 @@ initial_state <- c(S = early_data$S[29], I = early_data$I[29], R = early_data$R[
 times <- seq(0, 20, by = 1) #that's 201 numbers not 200
 
 # Estmated parameters
-parameters <- c(beta = 0.5, gamma = 0.3)
+parameters <- c(beta = 0.5, gamma = 0.5)
 
 # Running the SIR model
 Model_sample <- SIR_result(initial_state = initial_state, times = times, sir_model= sir_model, parameters = parameters)
