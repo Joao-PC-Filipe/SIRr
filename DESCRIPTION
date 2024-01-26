@@ -2,11 +2,15 @@ Package: SIRr
 Type: Package
 Title: What the Package Does (Title Case)
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Siún Mulcahy, Ellen Creed, Joao Filipe
+Maintainer:  <siun.mulcahy.2021@mumail.ie> <ellen.creed.2021@mumail.ie> <joao.cp.filipe@gmail.com>
+Description: This package provides tools for simulating the SIR (Susceptible, Infected, Recovered) 
+    model, a fundamental model in epidemiology for understanding the spread of infectious diseases. 
+    It includes functionality to set up the initial state, parameters, and time frame for the 
+    simulation, execute the model, and visualize the results over time. The package uses a 
+    class-based approach for managing model data and uses the deSolve package for solving 
+    ordinary differential equations.
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 <<<<<<< HEAD
