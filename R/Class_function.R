@@ -59,10 +59,6 @@
 #' print(sir_result_object@output)
 
 
-library(methods)
-library(deSolve)
-library(devtools)
-
 initial_state <- c(S = 0.99, I = 0.01, R = 0)
 parameters <- c(beta = 0.3, gamma = 0.1)
 times <- seq(0, 80, by = 1)
@@ -119,4 +115,4 @@ sir_result_object <- generate(sir_result_object)
 
 print(sir_result_object@output)
 
-devtools::check()
+
