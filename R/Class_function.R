@@ -2,7 +2,10 @@
 #' @title Defines a class to represent the results of the SIR model simulation.
 #' @description Represents the results of the SIR model simulation.
 #' @export SIRResult
-#' @author Ellen Creed
+#' @author "Ellen Creed"
+#' @importFrom methods "setMethod" "setGeneric" "setClass"
+#' @importFrom deSolve "ode"
+#' @importFrom devtools "check"
 #' @keywords "class" "SIRResult"
 #' @seealso \code{\link{initialize.SIRResult}}, \code{\link{generate.SIRResult}}
 
@@ -25,6 +28,34 @@
 #' @return An updated object of class SIRResult with the simulation results.
 #' @keywords methods generate SIRResult
 #' @export
+#' @examples
+#' # Define initial state and parameters
+#' initial_state <- c(S = 0.99, I = 0.01, R = 0)
+#' parameters <- c(beta = 0.3, gamma = 0.1)
+#'
+#' # Define time points
+#' times <- seq(0, 80, by = 1)
+#'
+#' # Create an object of class SIRResult
+#' sir_result_object <- new("SIRResult",
+#'                          initial_state = initial_state,
+#'                          times = times,
+#'                          sir_model = function(time, state, parameters) {
+#'                            with(as.list(c(state, parameters)), {
+#'                              dS <- -beta * S * I
+#'                              dI <- beta * S * I - gamma * I
+#'                              dR <- gamma * I
+#'                              return(list(c(dS, dI, dR)))
+#'                            })
+#'                          },
+#'                          parameters = parameters)
+#'
+#' # Generate the SIR results
+#' sir_result_object <- generate(sir_result_object)
+#'
+#' # View the output
+#' print(sir_result_object@output)
+
 
 library(methods)
 library(deSolve)
@@ -33,6 +64,7 @@ library(devtools)
 initial_state <- c(S = 0.99, I = 0.01, R = 0)
 parameters <- c(beta = 0.3, gamma = 0.1)
 times <- seq(0, 80, by = 1)
+
 
 #Define the SIRResult class
 setClass("SIRResult",
@@ -67,6 +99,7 @@ setMethod("generate",
             return(object)
           })
 
+
 sir_result_object <- new("SIRResult",
                          initial_state = initial_state,
                          times = times,
@@ -82,6 +115,6 @@ sir_result_object <- new("SIRResult",
 
 sir_result_object <- generate(sir_result_object)
 
-
+print(sir_result_object@output)
 
 devtools::check()
