@@ -3,7 +3,7 @@ Type: Package
 Title: What the Package Does (Title Case)
 Version: 0.1.0
 Author: Siún Mulcahy, Ellen Creed, Joao Filipe
-Maintainer:  <siun.mulcahy.2021@mumail.ie> <ellen.creed.2021@mumail.ie> <joao.cp.filipe@gmail.com>
+Maintainer: <siun.mulcahy.2021@mumail.ie> <ellen.creed.2021@mumail.ie> <joao.cp.filipe@gmail.com>
 Description: This package provides tools for simulating the SIR (Susceptible, Infected, Recovered) 
     model, a fundamental model in epidemiology for understanding the spread of infectious diseases. 
     It includes functionality to set up the initial state, parameters, and time frame for the 
@@ -14,9 +14,11 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Suggests: 
-    knitr
-Imports: desolve, 
+    knitr,
+    testthat (>= 3.0.0)
+Imports: deSolve, 
   ggplot2, methods
 RoxygenNote: 7.2.3
 Depends: 
     R (>= 2.10)
+Config/testthat/edition: 3
