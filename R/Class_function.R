@@ -30,7 +30,13 @@
 #' @export
 #' @examples
 
+library(methods)
+library(deSolve)
+library(devtools)
 
+initial_state <- c(S = 0.99, I = 0.01, R = 0)
+parameters <- c(beta = 0.3, gamma = 0.1)
+times <- seq(0, 80, by = 1)
 
 
 #Define the SIRResult class
@@ -66,12 +72,13 @@ setMethod("generate",
             return(object)
           })
 
+
 sir_result_object <- new("SIRResult",
                          initial_state = initial_state,
                          times = times,
                          sir_model = function(time, state, parameters) {
                            with(as.list(c(state, parameters)), {
-                             dS <- beta * S * I
+                             dS <- -beta * S * I
                              dI <- beta * S * I - gamma * I
                              dR <- gamma * I
                              return(list(c(dS, dI, dR)))
