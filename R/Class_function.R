@@ -2,7 +2,10 @@
 #' @title Defines a class to represent the results of the SIR model simulation.
 #' @description Represents the results of the SIR model simulation.
 #' @export SIRResult
-#' @author Ellen Creed
+#' @author "Ellen Creed"
+#' @importFrom methods "setMethod" "setGeneric" "setClass"
+#' @importFrom deSolve "ode"
+#' @importFrom devtools "check"
 #' @keywords "class" "SIRResult"
 #' @seealso \code{\link{initialize.SIRResult}}, \code{\link{generate.SIRResult}}
 
@@ -25,10 +28,9 @@
 #' @return An updated object of class SIRResult with the simulation results.
 #' @keywords methods generate SIRResult
 #' @export
+#' @examples
 
-library(methods)
-library(deSolve)
-library(devtools)
+
 
 
 #Define the SIRResult class
