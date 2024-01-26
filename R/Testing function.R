@@ -29,18 +29,20 @@ initial_susceptible <- total_population - initial_infected - initial_recovered
 
 ##################
 # Convert Cumulative Cases and Deaths to Proportions
-early_data$Proportion_Cumulative_cases <- (cumsum(early_data$New_daily_cases) / total_population)*100
-early_data$Proportion_Cumulative_deaths <- (cumsum(early_data$Daily_deaths) / total_population)*100
+#early_data$Proportion_Cumulative_cases <- (cumsum(early_data$New_daily_cases) / total_population)*100
+early_data$Proportion_Cumulative_cases <- (cumsum(early_data$New_daily_cases) / total_population)
+#early_data$Proportion_Cumulative_deaths <- (cumsum(early_data$Daily_deaths) / total_population)*100
+early_data$Proportion_Cumulative_deaths <- (cumsum(early_data$Daily_deaths) / total_population)
 
 # Estimating Proportion of Recovered Individuals
-early_data$Proportion_Estimated_recovered <- (lag(early_data$Proportion_Cumulative_cases, infection_duration, default = 0) - early_data$Proportion_Cumulative_deaths)*100
-
+#early_data$Proportion_Estimated_recovered <- (lag(early_data$Proportion_Cumulative_cases, infection_duration, default = 0) - early_data$Proportion_Cumulative_deaths)*100
+early_data$Proportion_Estimated_recovered <- (lag(early_data$Proportion_Cumulative_cases, infection_duration, default = 0) - early_data$Proportion_Cumulative_deaths)
 # Calculating the Proportion of Currently Infected
-early_data$Proportion_Infected <- (early_data$New_daily_cases / total_population)*100
-
+#early_data$Proportion_Infected <- (early_data$New_daily_cases / total_population)*100
+early_data$Proportion_Estimated_recovered <- (lag(early_data$Proportion_Cumulative_cases, infection_duration, default = 0) - early_data$Proportion_Cumulative_deaths)
 # Calculating the Proportion of Susceptible Individuals
-early_data$Proportion_Susceptible <-(1 - early_data$Proportion_Cumulative_cases - early_data$Proportion_Estimated_recovered)*100
-
+#early_data$Proportion_Susceptible <-(1 - early_data$Proportion_Cumulative_cases - early_data$Proportion_Estimated_recovered)*100
+early_data$Proportion_Susceptible <-(1 - early_data$Proportion_Cumulative_cases - early_data$Proportion_Estimated_recovered)
 # Creating the S, I, R columns
 early_data$S <- early_data$Proportion_Susceptible
 early_data$I <- early_data$Proportion_Infected
@@ -73,10 +75,10 @@ initial_state <- c(S = early_data$S[29], I = early_data$I[29], R = early_data$R[
 
 # 200 days of data ############ NO LONGER 200 DAYS OF DATA ############
 ########## It's now 150 days after starting on day 51 due to observations with zeros
-times <- seq(0, 20, by = 1) #that's 201 numbers not 200
+times <- seq(0, 200, by = 1) #that's 201 numbers not 200
 
 # Estmated parameters
-parameters <- c(beta = 0.5, gamma = 0.3)
+parameters <- c(beta = 0.5, gamma = 0.5)
 
 # Running the SIR model
 Model_sample <- SIR_result(initial_state = initial_state, times = times, sir_model= sir_model, parameters = parameters)

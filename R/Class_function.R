@@ -79,6 +79,6 @@ sir_result_object <- new("SIRResult",
 
 sir_result_object <- generate(sir_result_object)
 
-print(sir_result_object@output)
+
 
 devtools::check()
