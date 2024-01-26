@@ -17,7 +17,7 @@ LazyData: true
 =======
 Suggests: 
     knitr
-Imports: desolve, 
+Imports: deSolve, 
   ggplot2, methods
 RoxygenNote: 7.2.3
 >>>>>>> e082dd2545723e893a239f159eceb815288d9991
