@@ -25,10 +25,10 @@ early_data$Cumulative_deaths <- cumsum(early_data$Daily_deaths)
 infection_duration <- 14
 
 #4. Estimating recovered individuals
-early_data$Estimated_recovered <- lag(early_data$Cumulative_cases, infection_duration, default = 0) - early_data$Cumulative_deaths
+early_data$Estimated_recovered <- lag(early_data$Cumulative_cases, infection_duration, default = 0)
 
 #5. Total population
-total_population <- 59440000
+total_population <- 59440000/10000
 
 #6. Initial number of infected
 initial_infected <- early_data$New_daily_cases[which(early_data$New_daily_cases > 0)[1]]
@@ -42,20 +42,23 @@ initial_susceptible <- total_population - initial_infected - initial_recovered
 ##################
 # Convert Cumulative Cases and Deaths to Proportions
 early_data$Proportion_Cumulative_cases <- early_data$Cumulative_cases / total_population
-early_data$Proportion_Cumulative_deaths <- early_data$total_deaths / total_population
+early_data$Proportion_Cumulative_deaths <- early_data$Cumulative_deaths / total_population
 
 # Estimating Proportion of Recovered Individuals
-early_data$Proportion_Estimated_recovered <- lag(early_data$Proportion_Cumulative_cases, infection_duration, default = 0) - early_data$Proportion_Cumulative_deaths
+early_data$Proportion_Estimated_recovered <- lag(early_data$Proportion_Cumulative_cases, infection_duration, default = 0)
 
 # Calculating the Proportion of Currently Infected
 #### This is the proportion of population infected daily not the full proportion
 #####of infected population at a given time####
-early_data$Proportion_Infected <- early_data$New_daily_cases / total_population
+#early_data$Proportion_Infected <- early_data$New_daily_cases / total_population
+
+early_data$Proportion_Infected <- (early_data$Cumulative_cases - early_data$Cumulative_deaths-
+early_data$Estimated_recovered)/ total_population
 
 # Calculating the Proportion of Susceptible Individuals
 #### Estimated recovered is just the cumulative cases lagged by 14 days so by subtracting
 #### twice we are double counting away from the susceptible population
-early_data$Proportion_Susceptible <- 1 - early_data$Proportion_Cumulative_cases - early_data$Proportion_Estimated_recovered
+early_data$Proportion_Susceptible <- 1 - early_data$Proportion_Cumulative_cases
 
 # Creating the S, I, R columns
 early_data$S <- early_data$Proportion_Susceptible

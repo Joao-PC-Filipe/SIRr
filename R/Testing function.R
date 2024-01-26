@@ -71,11 +71,11 @@ SIR_result <- function(initial_state, times, sir_model, parameters){
 library(deSolve)
 
 # Initial conditions from the first day of data
-initial_state <- c(S = early_data$S[29], I = early_data$I[29], R = early_data$R[29])
+initial_state <- c(S = early_data$S[1], I = early_data$I[1], R = early_data$R[1])
 
 # 200 days of data ############ NO LONGER 200 DAYS OF DATA ############
 ########## It's now 150 days after starting on day 51 due to observations with zeros
-times <- seq(0, 200, by = 1) #that's 201 numbers not 200
+times <- seq(1,28 , by = 1) #that's 201 numbers not 200
 
 # Estmated parameters
 parameters <- c(beta = 0.5, gamma = 0.5)
