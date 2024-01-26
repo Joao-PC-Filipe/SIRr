@@ -2,7 +2,7 @@
 #' @title Defines a class to represent the results of the SIR model simulation.
 #' @description Represents the results of the SIR model simulation.
 #' @export SIRResult
-#' @author "Ellen Creed"
+#' @author "Joao Filipe" "Siun Mulcahy" "Ellen Creed"
 #' @importFrom methods "setMethod" "setGeneric" "setClass"
 #' @importFrom deSolve "ode"
 #' @importFrom devtools "check"
