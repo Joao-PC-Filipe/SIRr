@@ -1,0 +1,93 @@
+---
+title: "Vignette Title"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+#Introduction
+The Susceptible-Infectious-Recovered (SIR) model is a classic compartmental model used to understand spread of infectious diseases in a population. This vignette demonstrates how to simulate and visualise the SIR model using the 'SIRr' package in R.
+
+#Installation
+To install the 'SIRr' package, you can use the following code:
+
+```{r}
+install.packages("SIRr")
+
+devtools::install_github('Joao-PC-Filipe/SIRr')
+
+```
+
+#Usage
+Firstly, load the 'SIRr' package and define the initial parameters for our simulation.
+
+```{r}
+library(SIRr)
+
+# Define initial parameters
+initial_state <- c(S = 0.99, I = 0.01, R = 0)
+parameters <- c(beta = 0.3, gamma = 0.1)
+times <- seq(0, 80, by = 1)
+
+```
+
+Next, we'll create an object of class SIRResult using the new() function:
+
+```{r}
+
+# Create an object of class SIRResult
+sir_result_object <- new("SIRResult",
+                         initial_state = initial_state,
+                         times = times,
+                         sir_model = function(time, state, parameters) {
+                           with(as.list(c(state, parameters)), {
+                             dS <- -beta * S * I
+                             dI <- beta * S * I - gamma * I
+                             dR <- gamma * I
+                             return(list(c(dS, dI, dR)))
+                           })
+                         },
+                         parameters = parameters)
+
+```
+
+
+Now, let's generate the SIR model simulation results using the generate() function:
+
+```{r}
+
+# Generate the SIR results
+sir_result_object <- generate(sir_result_object)
+
+```
+
+
+Finally, we can visualize the simulation results using the create_sir_plot() function:
+
+```{r}
+# Plot the simulation results
+sir_plot <- create_sir_plot(sir_result_object@output)
+print(sir_plot)
+
+```
+
+#Conclusion
+This vignette provided a brief overview of simulating and visualizing the SIR model using the SIRr package in R. For more details and advanced usage, please refer to the package documentation.
+
+
+
+
+
+
+
