@@ -2,7 +2,7 @@
 #' @title Defines a class to represent the results of the SIR model simulation.
 #' @description Represents the results of the SIR model simulation.
 #' @export SIRResult
-#' @author "Ellen Creed"
+#' @author Joao Filipe Siun Mulcahy Ellen Creed
 #' @importFrom methods "setMethod" "setGeneric" "setClass"
 #' @importFrom deSolve "ode"
 #' @importFrom devtools "check"
@@ -20,6 +20,7 @@
 #' @return An object of class SIRResult.
 #' @keywords methods initialize SIRResult
 #' @export
+#' @author Joao Filipe Siun Mulcahy Ellen Creed
 
 #' Generate SIR results
 #' @title Generates SIR model simulation results.
@@ -28,6 +29,7 @@
 #' @return An updated object of class SIRResult with the simulation results.
 #' @keywords methods generate SIRResult
 #' @export
+#' @author Joao Filipe Siun Mulcahy Ellen Creed
 #' @examples
 #' # Define initial state and parameters
 #' initial_state <- c(S = 0.99, I = 0.01, R = 0)

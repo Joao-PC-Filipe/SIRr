@@ -6,6 +6,7 @@
 #' @param title A character string specifying the title of the plot. Default is "SIR Model Simulation".
 #' @return A ggplot object representing the SIR model simulation plot.
 #'
+#' @author Joao Filipe Siun Mulcahy Ellen Creed
 #' @importFrom ggplot2 "ggplot" "geom_line" "labs"
 #'
 #' @examples
