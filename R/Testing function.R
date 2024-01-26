@@ -14,6 +14,7 @@ early_data$Cumulative_deaths <- cumsum(early_data$Daily_deaths)
 #4. Estimating recovered individuals
 early_data$Estimated_recovered <- lag(early_data$Cumulative_cases, infection_duration, default = 0) - early_data$Cumulative_deaths
 
+
 #5. Total population
 total_population <- 59440000
 
@@ -70,11 +71,13 @@ library(deSolve)
 # Initial conditions from the first day of data
 initial_state <- c(S = early_data$S[1], I = early_data$I[1], R = early_data$R[1])
 
-# 200 days of data
-times <- seq(0, 200, by = 1)
+# 200 days of data ############ NO LONGER 200 DAYS OF DATA ############
+########## It's now 150 days after starting on day 51 due to observations with zeros
+times <- seq(0, 200, by = 1) #that's 201 numbers not 200
 
 # Estmated parameters
 parameters <- c(beta = 0.3, gamma = 0.9)
 
 # Running the SIR model
-SIR_result(initial_state = initial_state, times = times, sir_model= sir_model, parameters = parameters)
+Model_sample <- SIR_result(initial_state = initial_state, times = times, sir_model= sir_model, parameters = parameters)
+
